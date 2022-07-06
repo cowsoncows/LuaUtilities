@@ -1,11 +1,27 @@
+--[[
+
+    Player-specific rate limiter for Roblox. Useful for limiting server remote objects or client UI buttons.
+
+    RateLimiter.new(cooldown: number [, limit: number]) -> RateLimiter
+
+]]
+
 local Players = game:GetService("Players")
 
 local RateLimiter = {}
 RateLimiter.__index = RateLimiter
 
+--- @param cooldown number
+--- @param limit ?number 
+---- Creates a player-specific rate limiter that will check true every `cooldown` seconds since the last check
+---- Optionally disregards the cooldown if the number of checks is below `limit`
 function RateLimiter.new(cooldown, limit)
+    assert(cooldown ~= nil, "RateLimiter.new must receive a cooldown")
+    assert(type(cooldown) == "number", "RateLimiter cooldown must be a number")
+    assert(type(limit) == "number", "RateLimiter limit must be a number")
+
     local rateLimiter = setmetatable({
-        _cooldown = cooldown or 1,
+        _cooldown = cooldown,
         _limit = limit or 1,
         _playerTimestamps = {},
         _playerRequestAmounts = {}
