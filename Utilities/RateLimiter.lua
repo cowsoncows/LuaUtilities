@@ -13,7 +13,7 @@ RateLimiter.__index = RateLimiter
 
 --- @param cooldown number
 --- @param limit ?number 
----- Creates a player-specific rate limiter that will check true every `cooldown` seconds since the last check
+---- Creates a player-specific rate limiter that will check true every `cooldown` seconds since the last passing check
 ---- Optionally disregards the cooldown if the number of checks is below `limit`
 function RateLimiter.new(cooldown, limit)
     assert(cooldown ~= nil, "RateLimiter.new must receive a cooldown")
