@@ -18,7 +18,7 @@ RateLimiter.__index = RateLimiter
 function RateLimiter.new(cooldown, limit)
     assert(cooldown ~= nil, "RateLimiter.new must receive a cooldown")
     assert(type(cooldown) == "number", "RateLimiter cooldown must be a number")
-    assert(type(limit) == "number", "RateLimiter limit must be a number")
+    assert(type(limit) == "number" or type(limit) == "nil", "RateLimiter limit must be a number")
 
     local rateLimiter = setmetatable({
         _cooldown = cooldown,
